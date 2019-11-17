@@ -1,35 +1,56 @@
-# Syllabus
+# ECE NodeJS Lab 1 2019-2020
+
+## Authors
+- CHEONG Loïc : huangloic@hotmail.com
+- GUPTA Chirag : unknown
+ECE's students in the group ING 4 SI 03 Inter 
 
 ## Introduction
+This lab contains 2 works 
 
-We will cover best practices when developing Node.js programs including API design, package definition, NPM interaction, test coverages and TypeScript. Each unit of the course is designed to complement each other in the building of a real-life application. We propose to build an API enabling to store and retrieve timeseries data with a complementary web UI. For example, the result could be used to collect system metrics from a cluster.
+Part 1: Node.js
+The work is in the file hello.js
+Create a basic app with three routes:
+/ explains how /hello works
+/hello takes a name query parameter and
+random names replies hello [name]
+your own name replies with a short intro of yourself
+any other replies a 404 code with a not found message
 
-## Requirements
 
-This course is requiring familiarity with the JavaScript language and general knowledges in Web technologies. Prior experience with server side environment such as Lamp is a plus. A reminder of basic web and UNIX knowledge will be done during first class.
+Part 2: Dependency managment in Node.js
+Node.js modules
+Packages
+Using Nodemon utility
+You should have an index.js file with the server creation and handles.js defining the server's callback
+Add a package.json file with you module declaration
+Add a readme.md file with title, introduction, run instructions and your name
 
-## Outline
+## Run instructions
+1. Choose an editor of your choice with a terminal (VS Code, WebStorm, etc.)
 
-1.  Node.js
-2.  Dependency management & ExpressJS framework
-3.  Transpilation & embedded datastore with unit testing
-4.  Middlewares & authentication
-5.  Real-time communication with Socket.io & production considerations
-
-## Bibliography/webography
-
-No book is used nor required. Reliable information is gathered from wikis, GitHub, source codes and various blogs.
-
-## About those presentations
-
-Every presentation uses [reveal.js](https://github.com/hakimel/reveal.js/)
-
-To export to pdf, use [decktape](https://github.com/astefanutti/decktape) :
-
+2. Download the lab
+Clone the repository wherever you want with the command line : 
 ```
-git clone --depth 1 https://github.com/astefanutti/decktape.git
-cd decktape
-curl -L http://astefanutti.github.io/decktape/downloads/phantomjs-[platform] -o bin/phantomjs
-chmod +x bin/phantomjs
-./bin/phantomjs decktape.js generic --keycode=Space file://path/to/prez.html /path/to/dest.pdf
+cd PathOfYourChoice
+git clone https://github.com/CheongLoic/ece-nodejs-Lab1.git
+```
+
+3. Part 1 : Node.js
+```
+node hello
+```
+Open a brwoser of your choice (like Google Chrome) and paste the link below http://localhost:8080
+Afterwards follow all the instructions
+
+4. Dependency managment in Node.js
+```
+npm install nodemon --save
+npm run dev index.js
+```
+
+It will display almost the same thing than hello.js, but if you save some changes in your index.js or handles.js, it restarts the server on saving.
+It faster than using 
+```
+node index.js
 ```
