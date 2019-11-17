@@ -10,6 +10,7 @@ ECE's students in the group ING 4 SI 03 Inter
 This lab contains 2 works 
 
 Part 1: Node.js
+
 The work is in the file hello.js
 Create a basic app with three routes:
 / explains how /hello works
@@ -20,6 +21,7 @@ any other replies a 404 code with a not found message
 
 
 Part 2: Dependency managment in Node.js
+
 Node.js modules
 Packages
 Using Nodemon utility
