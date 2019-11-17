@@ -28,10 +28,11 @@ Add a package.json file with you module declaration
 Add a readme.md file with title, introduction, run instructions and your name
 
 ## Run instructions
-1. Choose an editor of your choice with a terminal (VS Code, WebStorm, etc.)
+1. Choose an editor of your choice (VS Code, WebStorm, Atom, Sublime Text, TextWrangler, Notepad++; etc.)
 
 2. Download the lab
-Clone the repository wherever you want with the command line : 
+
+Clone the repository wherever you want with the command line at the terminal: 
 ```
 cd PathOfYourChoice
 git clone https://github.com/CheongLoic/ece-nodejs-Lab1.git
@@ -41,8 +42,7 @@ git clone https://github.com/CheongLoic/ece-nodejs-Lab1.git
 ```
 node hello
 ```
-Open a brwoser of your choice (like Google Chrome) and paste the link below http://localhost:8080
-Afterwards follow all the instructions
+Open a browser of your choice (like Google Chrome) and paste the link below http://localhost:8080. Afterwards follow all the instructions
 
 4. Dependency managment in Node.js
 ```
@@ -50,7 +50,7 @@ npm install nodemon --save
 npm run dev index.js
 ```
 
-It will display almost the same thing than hello.js, but if you save some changes in your index.js or handles.js, it restarts the server on saving.
+It will display almost the same thing than hello.js, but if you save some changes in index.js or handles.js, it will restart the server on saving.
 It faster than using 
 ```
 node index.js
