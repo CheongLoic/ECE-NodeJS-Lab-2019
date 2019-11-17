@@ -2,7 +2,7 @@
 
 ## Authors
 - CHEONG Loïc : huangloic@hotmail.com
-- GUPTA Chirag : unknown
+- GUPTA Chirag : chiraggupta199806@gmail.com
 
 ECE's students in the group ING 4 SI 03 Inter 
 
