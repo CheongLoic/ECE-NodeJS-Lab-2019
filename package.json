@@ -7,7 +7,7 @@
   "private": true,
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "./node_modules/.bin/nodemon "
+    "dev": "nodemon "
   },
   "repository": {
     "type": "git",
@@ -17,5 +17,9 @@
   "homepage": "https://github.com/CheongLoic/ece-nodejs-Lab1#readme",
   "dependencies": {
     "nodemon": "^1.19.4"
-  }
+  },
+  "bugs": {
+    "url": "https://github.com/CheongLoic/ece-nodejs-Lab1/issues"
+  },
+  "devDependencies": {}
 }

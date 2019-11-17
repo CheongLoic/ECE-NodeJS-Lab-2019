@@ -8,7 +8,7 @@ const content = '<!DOCTYPE html>' +
 '        <title>ECE AST</title>' +
 '    </head>' + 
 '    <body>' +
-'         <p>Hello, you are in 2nd work!</p>' +
+'         <p>Hello, you are in 2nd work !</p>' +
 '         <p>You are now at http://localhost:8080/</p>' +
 '         <p>This page will explain you how <strong>/hello </strong> works</p>' +
 '         <p>Go to the page http://localhost:8080/hello?name=<strong>YourName</strong></p>' +
