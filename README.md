@@ -53,7 +53,7 @@ npm run dev index.js
 ```
 
 It will display almost the same thing than hello.js, but if you save some changes in index.js or handles.js, it will restart the server on saving.
-It faster than using 
+It's faster than using 
 ```
 node index.js
 ```
