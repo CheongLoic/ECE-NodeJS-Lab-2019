@@ -1,0 +1,24 @@
+{
+  "name": "ECE-NodeJS-Lab-2019",
+  "version": "0.1.0",
+  "description": "NodeJS lab 1 for ECE class. It contains two works to check out",
+  "author": "Loïc CHEONG - Chirag GUPTA",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon "
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/CheongLoic/ECE-NodeJS-Lab-2019.git"
+  },
+  "license": "ISC",
+  "homepage": "https://github.com/CheongLoic/ECE-NodeJS-Lab-2019.git#readme",
+  "dependencies": {
+    "nodemon": "^1.19.4"
+  },
+  "bugs": {
+    "url": "https://github.com/CheongLoic/ece-nodejs-Lab1/issues"
+  },
+  "devDependencies": {}
+}
