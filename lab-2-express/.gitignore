@@ -1,0 +1,6 @@
+.*
+!.gitignore
+exports
+
+# dependencies
+/node_modules
