@@ -1,4 +1,4 @@
-# ECE NodeJS Lab 2.1 2019-2020
+# ECE NodeJS Lab 2.2 2019-2020
 
 ## Authors
 - CHEONG Loïc : huangloic@hotmail.com
