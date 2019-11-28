@@ -10,16 +10,16 @@ const port: string = process.env.PORT || '8080'
 app.use(express.static(path.join(__dirname, 'public')))
 
 app.get('/', (req: any, res: any) => {
-  res.write('Hello world')
-  res.end()
+  /*res.write('Hello world')
+  res.end()*/
+  res.render('home.ejs', {})
 })
+
 app.get(
   '/hello/:name',
   (req, res) => res.render('hello.ejs', {name:req.params.name})
 )
-app.get('/hey/:name', (req,res) =>
-	res.send("Your name is: "+ req.params.name)
-)
+
 app.get('/metrics.json', (req: any, res: any) => {
   MetricsHandler.get((err: Error | null, result?: any) => {
     if (err) {
@@ -28,6 +28,10 @@ app.get('/metrics.json', (req: any, res: any) => {
     res.json(result)
   })
 })
+
+app.use(function(req, res, next){
+  res.status(404).render('error.ejs', {});
+});
 
 app.listen(port, (err: Error) => {
   if (err) {

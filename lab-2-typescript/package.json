@@ -1,8 +1,8 @@
 {
-  "name": "cp2.1",
+  "name": "ECE-NodeJS-Lab2-Typescript-2019",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "Convert JS files to Typescript TS files",
+  "main": "server.ts",
   "scripts": {
     "start": "./node_modules/.bin/ts-node src/server.ts",
     "dev": "./node_modules/.bin/nodemon",

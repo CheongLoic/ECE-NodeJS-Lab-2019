@@ -1,14 +1,14 @@
 {
-  "name": "cp2",
+  "name": "ECE-NodeJS-Lab2-Express-2019",
   "version": "1.0.0",
-  "description": "",
+  "description": "Use express instead of doing routing and server setup manually",
+  "author": "Loïc CHEONG - Chirag GUPTA",
   "main": "index.js",
   "scripts": {
     "dev": "./node_modules/.bin/nodemon",
-    "start":"node index.js",
+    "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
   "license": "ISC",
   "dependencies": {
     "ejs": "^2.7.4",
