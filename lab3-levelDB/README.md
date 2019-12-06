@@ -16,8 +16,8 @@ Tasks :
 - [ ] Add a route to delete a metric based on its key
 
 Only id=loic has metrics
-Go to http://localhost:8083/metrics/loic to show all his metrics
-The route http://localhost:8083/metricsToDelete/loic doesn't work
+Go to http://localhost:8082/metrics/loic to show all his metrics
+The route http://localhost:8082/metricsToDelete/loic doesn't work
 
 ## Run instructions
 After you cloned the repository , execute those commands :
@@ -26,7 +26,7 @@ cd lab3-levelDB
 npm install 
 npm start
 ```
-Then open a browser with the link below http://localhost:8083/
+Then open a browser with the link below http://localhost:8082/
 
 
 ## Build
