@@ -39,16 +39,16 @@ export class User {
     this.email = email
 
     if (!passwordHashed) {
-      console.log("USERNAME : "+username)
-      console.log("EMAIL : "+email)
-      console.log("PASSWORD : "+password)
+      //console.log("USERNAME : "+username)
+      //console.log("EMAIL : "+email)
+      //console.log("PASSWORD : "+password)
       this.setPassword(password)
     } else this.password = password
   }
 
   static fromDb(username: string, value: any): User {
     const [password, email] = value.split(":")
-    console.log(value)
+    //console.log(value)
     return new User(username, email, password)
   }
 
@@ -63,9 +63,9 @@ export class User {
 
   public validatePassword(toValidate: String): boolean {
     //return comparison with hashed password
-    console.log("Entered password :"+toValidate)
-    console.log("user's password : "+this.password)
-    console.log(this.password === toValidate)
+    //console.log("Entered password :"+toValidate)
+    //console.log("user's password : "+this.password)
+    //4console.log(this.password === toValidate)
     return this.password == toValidate
 
   }

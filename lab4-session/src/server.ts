@@ -71,11 +71,15 @@ const dbUser: UserHandler = new UserHandler('./db/users') //create or open a lev
 const authRouter = express.Router()
 
 authRouter.get('/login', (req: any, res: any) => {
-  res.render('login')
+  let notFoundErr : string = ""
+  let pwdErr : string = ""
+  res.render('login.ejs', {notFoundErr : notFoundErr, pwdErr : pwdErr})
 })
 
 authRouter.get('/signup', (req: any, res: any) => {
-  res.render('signup')  //TO DO
+  let existErr : string = ""
+  let emptyErr : string = ""
+  res.render('signup.ejs', { existErr: existErr, emptyErr : emptyErr})
 })
 
 authRouter.get('/logout', (req: any, res: any) => {
@@ -86,46 +90,62 @@ authRouter.get('/logout', (req: any, res: any) => {
 
 authRouter.post('/signup', (req: any, res: any, next: any) => {
   console.log("attempt to create an account")
-  /*
-  dbUser.get(req.body.username, (err: Error | null, result?: User) => {
-    if (err) {
-      next(err)
-      //console.log('ERROR'+result) //no pb here
-    }
-    //console.log(result) //ok
-    console.log("pwd : "+ req.body.password)
-    if (result === undefined || !result.validatePassword(req.body.password)) {
-      //console.log("test bool ")
-      //1console.log('a'==='a')
-      console.log("password still not set")
-      console.log(result)
-      res.redirect('/login')
+  let existErr : string = ""
+  let emptyErr : string = ""
+
+  /*The code below use dbUser.get(...) twice 
+  The first use is to check out if the username is already in the database or not
+  The second time is to get new user's data to get into its profile page*/
+  dbUser.get(req.body.username, function (err: Error | null, result?: User) {
+    if (!err || result !== undefined) {
+      //if the username is not found in the db, then display existErr message
+      existErr = "Username already exists !"
+      res.render('signup.ejs', { existErr: existErr, emptyErr : emptyErr})
+    } else if (req.body.username === "" || req.body.email === "" || req.body.password === "") {
+      //if one of the fields was empty, then display emptyErr message
+      emptyErr = "One of the fields was empty !"
+      res.render('signup.ejs', { existErr: existErr, emptyErr : emptyErr})
     } else {
-      console.log("SUCCESSFULLY CONNECTED!!!")
-      req.session.loggedIn = true
-      req.session.user = result
-      res.redirect('/')
+      //all the fields are correct, start to save the new user in db
+      let user = new User(req.body.username, req.body.email, req.body.password)
+      dbUser.save(req.body, function (err: Error | null) {
+        //console.log("SUCCESSFULLY ADDED!!!")
+        dbUser.get(req.body.username, (err: Error | null, result?: User) => {
+          //console.log(result) 
+          if (err) {
+            next(err)
+          }
+          else {
+            //console.log("SUCCESSFULLY CONNECTED!!!")
+            req.session.loggedIn = true
+            req.session.user = result
+            res.redirect('/')
+          }
+        })
+      })
     }
-  })*/
+  })
 })
 
 
 authRouter.post('/login', (req: any, res: any, next: any) => {
+  let notFoundErr : string = ""
+  let pwdErr : string = ""
+
   dbUser.get(req.body.username, (err: Error | null, result?: User) => {
     if (err) {
       next(err)
-      //console.log('ERROR'+result) //no pb here
     }
-    //console.log(result) //ok
-    console.log("pwd : "+ req.body.password)
-    if (result === undefined || !result.validatePassword(req.body.password)) {
-      //console.log("test bool ")
-      //1console.log('a'==='a')
-      console.log("password still not set")
-      console.log(result)
-      res.redirect('/login')
+    //console.log(result) 
+    //console.log("pwd : "+ req.body.password)
+    if (result === undefined) {
+      notFoundErr = "User not found. Unknown username"
+      res.render('login.ejs', {notFoundErr : notFoundErr, pwdErr : pwdErr})
+    } else if (!result.validatePassword(req.body.password))  {
+      pwdErr = "Wrong password. Try again !"
+      res.render('login.ejs', {notFoundErr : notFoundErr, pwdErr : pwdErr})
     } else {
-      console.log("SUCCESSFULLY CONNECTED!!!")
+      //console.log("SUCCESSFULLY CONNECTED!!!")
       req.session.loggedIn = true
       req.session.user = result
       res.redirect('/')
@@ -175,9 +195,6 @@ app.use('/user', userRouter)
 
 
 
-
-
-
 const authCheck = function (req: any, res: any, next: any) {
   if (req.session.loggedIn) {
     next()
@@ -185,8 +202,12 @@ const authCheck = function (req: any, res: any, next: any) {
 }
 
 app.get('/', authCheck, (req: any, res: any) => {
-  res.render('index', { name: req.session.username })
+  res.render('index.ejs', { name: req.session.user.username })
 })
+
+app.use(function(req, res, next){
+  res.status(404).render('error.ejs', {port: port});
+});
 
 app.listen(port, (err: Error) => {
   if (err) {

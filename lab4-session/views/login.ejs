@@ -8,6 +8,10 @@
     <div id="form">
       <p>Please login to your account</p>
       <hr/>
+
+      <p style="color: red"><%= notFoundErr === "" ? "" : notFoundErr %></p>
+      <p style="color: red"><%= pwdErr === "" ? "" : pwdErr %></p>
+
       <form action="/login" method="post">
 
         <div class="form-group">

@@ -8,7 +8,10 @@
     <div id="form">
       <p>Please fill in this form below in order to create an account</p>
       <hr/>
-      <form action="/login" method="post">
+      <p style="color: red"><%= existErr === "" ? "" : existErr %></p>
+      <p style="color: red"><%= emptyErr === "" ? "" : emptyErr %></p>
+
+      <form action="/signup" method="post">
 
         <div class="form-group">
           <label for="form_username">Username</label>
@@ -30,7 +33,7 @@
 
       <hr/>
       <button class="btn btn-success btn-block" type="submit" href="/login" onClick='document.location.href="/login"'>
-        Go back to login page
+        Go back to the login page
       </button>
 
     </div>
