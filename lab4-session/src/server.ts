@@ -14,17 +14,14 @@ app.set('view engine', 'ejs');
 
 app.use(bodyparser.json())
 app.use(bodyparser.urlencoded())
-/*
-app.get('/', (req: any, res: any) => {
-  res.write('Hello world')
-  res.end()
-})
 
-app.get('/hello/:name', (req: any, res: any) => {
-  res.render('hello.ejs', {name: req.params.name})
-})
 
-const dbMet: MetricsHandler = new MetricsHandler('./db/metrics')
+
+
+
+
+
+const dbMet: MetricsHandler = new MetricsHandler('./db/metrics')  //create or open a levelDB database
 
 app.post('/metrics/:id', (req: any, res: any) => {
   dbMet.save(req.params.id, req.body, (err: Error | null) => {
@@ -32,7 +29,6 @@ app.post('/metrics/:id', (req: any, res: any) => {
     res.status(200).send('ok')
   })
 })
-
 
 app.get('/metrics/:id', (req: any, res: any) => {
   dbMet.getAll(
@@ -49,7 +45,10 @@ app.get('/metricsToDelete/:id', (req: any, res: any) => {
     console.log("Delete item")
     res.status(200).send(data)
   })
-})*/
+})
+
+
+
 
 
 
@@ -67,6 +66,7 @@ app.use(session({
 }))
 
 import { UserHandler, User } from './user'
+import { read } from 'fs'
 const dbUser: UserHandler = new UserHandler('./db/users') //create or open a levelDB database
 const authRouter = express.Router()
 
@@ -127,7 +127,6 @@ authRouter.post('/signup', (req: any, res: any, next: any) => {
   })
 })
 
-
 authRouter.post('/login', (req: any, res: any, next: any) => {
   let notFoundErr : string = ""
   let pwdErr : string = ""
@@ -146,11 +145,20 @@ authRouter.post('/login', (req: any, res: any, next: any) => {
       res.render('login.ejs', {notFoundErr : notFoundErr, pwdErr : pwdErr})
     } else {
       //console.log("SUCCESSFULLY CONNECTED!!!")
+
       req.session.loggedIn = true
       req.session.user = result
       res.redirect('/')
     }
   })
+})
+
+/* Supprime un élément de la todolist */
+authRouter.get('/deleteMetric/:index', (req: any, res: any, next: any) => {
+  if (req.params.index != '' && req.session.loggedIn === true) {
+      req.session.metrics.splice(req.params.index, 1);
+  }
+  res.redirect('/');
 })
 app.use(authRouter)  //enable the middleware of express.Router()
 
@@ -202,7 +210,7 @@ const authCheck = function (req: any, res: any, next: any) {
 }
 
 app.get('/', authCheck, (req: any, res: any) => {
-  res.render('index.ejs', { name: req.session.user.username })
+  res.render('index', { name: req.session.user.username})
 })
 
 app.use(function(req, res, next){

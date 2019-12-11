@@ -6,25 +6,23 @@
   <body class="container">
     <div class="col-md-6 col-md-offset-3">
       <h1>Hello <%=name %></h1>
-      <button class="btn btn-success" id="show-metrics">
-        Bring the metrics
-      </button>
-      <div id="metrics"></div>
-
+      <br/>
       <button class="btn btn-danger" href="/logout" onClick='document.location.href="/logout"'>
         Logout
       </button>
+      <br/><br/><br/>
+      <h3>Your metrics : </h3>
+      <div id="metrics"></div>
     </div>
-    <script>
-      $('#show-metrics').click((e) => {
-        e.preventDefault();
+    <ul>
+      <script>
         $.getJSON("/metrics/<%= name %>", {}, (data) => {
           const content = data.map(d => {
-            return 'timestamp: '+d.timestamp+', value: '+d.value+'';
+            return '<li> timestamp: '+d.timestamp+', value: '+d.value+'</li>';
           })
           $('#metrics').append(content.join("\n"));
         });
-      })
-    </script>
+      </script>
+    </ul>
   </body>
 </html>

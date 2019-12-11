@@ -19,7 +19,8 @@ export class MetricsHandler {
     this.db = LevelDB.open(dbPath)
   }
 
-  public save(key: number, metrics: Metric[], callback: (error: Error | null) => void) {
+  /*Save several metrics at once */
+  public save(key: string, metrics: Metric[], callback: (error: Error | null) => void) {
     const stream = WriteStream(this.db)
     stream.on('error', callback)
     stream.on('close', callback)
@@ -30,13 +31,16 @@ export class MetricsHandler {
     stream.end()
   }
 
+  /*Get all the metrics from the user with key*/
   public getAll(key: string, callback: (error: Error | null, result: Metric[] | null) => void) {
     // Read
     let metrics: Metric[] = [];
     this.db.createReadStream()
       .on('data', function (data) {
-        console.log(key)
+        //console.log(key)
         let id: string = data.key.split(':')[1]
+        //console.log(data.key)
+        //console.log(id)
         if( id == key )
         {
           let timestamp: string = data.key.split(':')[2]
