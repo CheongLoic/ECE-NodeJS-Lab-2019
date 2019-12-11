@@ -74,11 +74,3 @@ typings/
 
 # FuseBox cache
 .fusebox/
-
-# MacOS
-.DS_Store
-
-db/*
-!*/.gitkeep
-src_old
-db_test
