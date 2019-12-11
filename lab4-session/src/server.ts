@@ -147,14 +147,14 @@ authRouter.post('/login', (req: any, res: any, next: any) => {
 })
 
 authRouter.post('/delete', (req: any, res: any, next: any) => {
-  if (req.body.timestamp > "0") {
+  if (req.body.timestamp >= "0"  && !isNaN(Number(req.body.timestamp))) {
     dbMet.delete(req.session.user.username, req.body.timestamp)
     res.redirect('/')
   }
 })
 
 authRouter.post('/add', (req: any, res: any, next: any) => {
-  if (req.body.timestamp > "0" && req.body.timestamp !=="" && req.body.value !=="") {
+  if (req.body.timestamp > "0" && req.body.timestamp !=="" && req.body.value !=="" && !isNaN(Number(req.body.value)) && !isNaN(Number(req.body.timestamp))) {
     dbMet.add(req.session.user.username, req.body.timestamp, req.body.value)
     res.redirect('/')
   }
