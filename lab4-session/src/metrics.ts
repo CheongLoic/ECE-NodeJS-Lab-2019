@@ -3,9 +3,9 @@ import WriteStream from 'level-ws'
 
 export class Metric {
   public timestamp: string
-  public value: number
+  public value: string
 
-  constructor(ts: string, v: number) {
+  constructor(ts: string, v: string) {
     this.timestamp = ts
     this.value = v
   }
@@ -44,48 +44,34 @@ export class MetricsHandler {
         if( id == key )
         {
           let timestamp: string = data.key.split(':')[2]
-          console.log('data.key.split2 : '+data.key.split(':')[2])
+          //console.log('data.key.split2 : '+data.key.split(':')[2])
           let oneMetric: Metric = new Metric(timestamp, data.value)
           metrics.push(oneMetric)
         }
         
       })
       .on('error', function (err) {
-        console.log('Oh my!', err)
+        //console.log('Oh my!', err)
         callback(err, null)
       })
       .on('close', function () {
-        console.log('Stream closed')
+        //console.log('Stream closed')
         callback(null, metrics)
       })
       .on('end', function () {
-        console.log('Stream ended')
+        //console.log('Stream ended')
       })
   }
 
-  public delete(key: string, callback: (error: Error | null, result: Metric[] | null) => void){
-    let metric: Metric[] = [];
-    this.db.createReadStream()
-    .on('data', function (data) {
-      console.log(key)
-      let id: string = data.key.split(':')[1]
-      if( id == key )
-          {
-            metric.pop()
-          }
+  public delete(user : string, timestamp: string) {
+    let key : string = "metric:"+user+":"+timestamp+""
+    this.db.del(key, (err)=>null)
+  }
 
-    })
-    .on('error', function (err) {
-      console.log('Oh my!', err)
-      callback(err,null)
-    })
-    .on('close', function () {
-      console.log('Stream closed')
-      callback(null,metric)
-    })
-    .on('end', function () {
-      console.log('Stream ended')
-    })
+  public add(user : string, timestamp: string, value : string) {
+    let key : string = "metric:"+user+":"+timestamp+""
+    let Value : string = value
+    this.db.put(key,Value, (err)=>null)
   }
   
 }

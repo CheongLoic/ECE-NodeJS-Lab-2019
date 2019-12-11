@@ -24,5 +24,27 @@
         });
       </script>
     </ul>
+
+    <h5>What do you want to do ?</h5>
+
+    <form action="/add" method="post">
+      <div class="form-group">
+        <label for="form_timestamp">Timestamp : </label>
+        <input id="form_timestamp" type="text" placeholder="Enter a positif number" name="timestamp" />
+        <label for="form_timestamp">, Value: </label>
+        <input id="form_timestamp" type="text" placeholder="Enter a number" name="value" />
+        <button class="btn btn-success " type="submit" value="Submit">Add/update a metric</button>
+      </div>
+    </form>
+
+    <form action="/delete" method="post">
+      <div class="form-group">
+        <label for="form_timestamp">Timestamp : </label>
+        <input id="form_timestamp" type="text" placeholder="Enter a positif number" name="timestamp" />
+        <button class="btn btn-success" type="submit" value="Submit">Delete a metric</button>
+      </div>
+    </form>
+
+
   </body>
 </html>

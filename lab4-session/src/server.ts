@@ -39,13 +39,6 @@ app.get('/metrics/:id', (req: any, res: any) => {
   })
 })
 
-app.get('/metricsToDelete/:id', (req: any, res: any) => {
-  dbMet.delete(req.params.id, (err: Error | null, data: Metric[] | null) => {
-    if (err) throw err
-    console.log("Delete item")
-    res.status(200).send(data)
-  })
-})
 
 
 
@@ -153,13 +146,20 @@ authRouter.post('/login', (req: any, res: any, next: any) => {
   })
 })
 
-/* Supprime un élément de la todolist */
-authRouter.get('/deleteMetric/:index', (req: any, res: any, next: any) => {
-  if (req.params.index != '' && req.session.loggedIn === true) {
-      req.session.metrics.splice(req.params.index, 1);
+authRouter.post('/delete', (req: any, res: any, next: any) => {
+  if (req.body.timestamp > "0") {
+    dbMet.delete(req.session.user.username, req.body.timestamp)
+    res.redirect('/')
   }
-  res.redirect('/');
 })
+
+authRouter.post('/add', (req: any, res: any, next: any) => {
+  if (req.body.timestamp > "0" && req.body.timestamp !=="" && req.body.value !=="") {
+    dbMet.add(req.session.user.username, req.body.timestamp, req.body.value)
+    res.redirect('/')
+  }
+})
+
 app.use(authRouter)  //enable the middleware of express.Router()
 
 
