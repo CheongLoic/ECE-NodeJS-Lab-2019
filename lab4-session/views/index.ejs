@@ -3,7 +3,7 @@
   <head>
       <% include partials/head %>
   </head>
-  <body class="container">
+  <body class="container" style="margin-bottom: 100px">
     <div class="col-md-6 col-md-offset-3">
       <h1>Hello <%=name %></h1>
       <br/>
@@ -27,6 +27,16 @@
 
     <h5>What do you want to do ?</h5>
 
+    <form action="/convert" method="post">
+      <div class="form-group">
+        <label for="form_datetime">Datetime : </label>
+        <input type="datetime-local" id="form_timestamp" name="dateTime" value="2019-12-01T00:00" min="1970-01-01T00:00" max="2100-12-31T23:59">
+        <p><%= datetime === "" ? "" : datetime %></p>
+      </div>
+      <button class="btn btn-primary " type="submit" value="Submit">Convert datetime into timestamp</button>
+    </form>
+
+    <br/>
     <form action="/add" method="post">
       <div class="form-group">
         <label for="form_timestamp">Timestamp : </label>

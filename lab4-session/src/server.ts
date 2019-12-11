@@ -34,7 +34,7 @@ app.get('/metrics/:id', (req: any, res: any) => {
   dbMet.getAll(
     req.params.id, (err: Error | null, result: Metric[] | null) => {
     if (err) throw err
-    console.log('getAll')
+    //console.log('getAll')
     res.status(200).send(result)
   })
 })
@@ -160,6 +160,12 @@ authRouter.post('/add', (req: any, res: any, next: any) => {
   }
 })
 
+authRouter.post('/convert', (req: any, res: any, next: any) => {
+  var time : string = String(new Date(req.body.dateTime).getTime())
+  var convert : string = "The timestamp of "+req.body.dateTime+" is : "+time+""
+  res.render('index', { name: req.session.user.username, datetime : convert})
+})
+
 app.use(authRouter)  //enable the middleware of express.Router()
 
 
@@ -210,7 +216,8 @@ const authCheck = function (req: any, res: any, next: any) {
 }
 
 app.get('/', authCheck, (req: any, res: any) => {
-  res.render('index', { name: req.session.user.username})
+  var time : string = ""
+  res.render('index', { name: req.session.user.username, datetime : time})
 })
 
 app.use(function(req, res, next){
