@@ -38,12 +38,22 @@
     </form>
 
     <br/>
+    <form action="/convert2" method="post">
+      <div class="form-group">
+        <label for="form_timestamp">Timestamp : </label>
+        <input id="form_timestamp" type="number" placeholder="Enter a positif number" name="timestamp" min="0"/>
+        <p><%= timestamp === "" ? "" : timestamp %></p>
+      </div>
+      <button class="btn btn-primary " type="submit" value="Submit">Convert timestamp into datetime</button>
+    </form>
+
+    <br/>
     <form action="/add" method="post">
       <div class="form-group">
         <label for="form_timestamp">Timestamp : </label>
-        <input id="form_timestamp" type="text" placeholder="Enter a positif number" name="timestamp" />
+        <input id="form_timestamp" type="number" placeholder="Enter a positif number" name="timestamp" min="0"/>
         <label for="form_timestamp">, Value: </label>
-        <input id="form_timestamp" type="text" placeholder="Enter a number" name="value" />
+        <input id="form_timestamp" type="number" placeholder="Enter a number" name="value" />
         <button class="btn btn-success " type="submit" value="Submit">Add/update a metric</button>
       </div>
     </form>
@@ -51,7 +61,7 @@
     <form action="/delete" method="post">
       <div class="form-group">
         <label for="form_timestamp">Timestamp : </label>
-        <input id="form_timestamp" type="text" placeholder="Enter a positif number" name="timestamp" />
+        <input id="form_timestamp" type="number" placeholder="Enter a positif number" name="timestamp" min="0"/>
         <button class="btn btn-success" type="submit" value="Submit">Delete a metric</button>
       </div>
     </form>

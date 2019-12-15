@@ -164,14 +164,14 @@ authRouter.post('/login', (req: any, res: any, next: any) => {
 })
 
 authRouter.post('/delete', (req: any, res: any, next: any) => {
-  if (req.body.timestamp >= "0"  && !isNaN(Number(req.body.timestamp))) {
+  if (!isNaN(Number(req.body.timestamp)) && req.body.timestamp !=="") {
     dbMet.delete(req.session.user.username, req.body.timestamp)
     res.redirect('/')
   }
 })
 
 authRouter.post('/add', (req: any, res: any, next: any) => {
-  if (req.body.timestamp > "0" && req.body.timestamp !=="" && req.body.value !=="" && !isNaN(Number(req.body.value)) && !isNaN(Number(req.body.timestamp))) {
+  if (req.body.timestamp !=="" && req.body.value !=="" && !isNaN(Number(req.body.value)) && !isNaN(Number(req.body.timestamp))) {
     dbMet.add(req.session.user.username, req.body.timestamp, req.body.value)
     res.redirect('/')
   }
@@ -179,9 +179,21 @@ authRouter.post('/add', (req: any, res: any, next: any) => {
 
 authRouter.post('/convert', (req: any, res: any, next: any) => {
   var time : string = String(new Date(req.body.dateTime).getTime())
-  var convert : string = "The timestamp of "+req.body.dateTime+" is : "+time+""
-  res.render('index', { name: req.session.user.username, datetime : convert})
+  var Datetime : string = "The timestamp of "+req.body.dateTime+" is : "+time+""
+  var Timestamp : string = ""
+  res.render('index', { name: req.session.user.username, datetime : Datetime, timestamp : Timestamp})
 })
+
+authRouter.post('/convert2', (req: any, res: any, next: any) => {
+  var Datetime: string = ""
+  var Timestamp : string = ""
+  if (!isNaN(Number(req.body.timestamp)) && req.body.timestamp !== "") {
+    var time : string = String(new Date(Number(req.body.timestamp)).toLocaleString())
+    Timestamp = "The datetime of "+req.body.timestamp+" is : "+time+""
+  }
+  res.render('index', { name: req.session.user.username, datetime : Datetime, timestamp : Timestamp})
+})
+
 
 app.use(authRouter)  //enable the middleware of express.Router()
 
@@ -234,8 +246,9 @@ const authCheck = function (req: any, res: any, next: any) {
 
 //if the user is authenticated, then go to its profile page with its metrics
 app.get('/', authCheck, (req: any, res: any) => {
-  var time : string = ""
-  res.render('index', { name: req.session.user.username, datetime : time})
+  var datetime : string = ""
+  var timestamp : string = ""
+  res.render('index', { name: req.session.user.username, datetime : datetime, timestamp : timestamp})
 })
 
 //Display an error page if the URL is unknown
