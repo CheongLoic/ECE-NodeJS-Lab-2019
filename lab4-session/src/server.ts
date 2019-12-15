@@ -1,5 +1,6 @@
 import express = require('express')
 import { Metric, MetricsHandler } from './metrics'
+import {drawChart} from './lineChart'
 import path = require('path')
 import bodyparser = require('body-parser')
 import session = require('express-session')
@@ -31,11 +32,28 @@ app.post('/metrics/:id', (req: any, res: any) => {
 })
 
 app.get('/metrics/:id', (req: any, res: any) => {
+  
   dbMet.getAll(
-    req.params.id, (err: Error | null, result: Metric[] | null) => {
+    req.params.id, (err: Error | null, metrics: Metric[] | null) => {
     if (err) throw err
-    //console.log('getAll')
-    res.status(200).send(result)
+    if (metrics !== null) {
+      let DATA : object[]= []
+      metrics.sort(function(a : Metric, b : Metric) {
+        if (Number(a.timestamp) > Number(b.timestamp)) {
+          return 1;
+        }
+        if (Number(a.timestamp) < Number(b.timestamp)) {
+          return -1;
+        }
+        return 0;
+      });
+      metrics.forEach((data)=> {
+        DATA.push({timestamp :Number(data.timestamp), value : Number(data.value)})
+      })
+      if (DATA.length == 0) res.status(404).render('error.ejs', {})
+      else res.status(200).send(DATA)
+    }
+    
   })
 })
 
@@ -77,7 +95,9 @@ authRouter.get('/signup', (req: any, res: any) => {
 
 authRouter.get('/logout', (req: any, res: any) => {
   delete req.session.loggedIn
-  delete req.session.user
+  delete req.session.user/*
+  delete req.session.TIMESTAMP
+  delete req.session.VALUE*/
   res.redirect('/login')
 })
 
@@ -109,7 +129,6 @@ authRouter.post('/signup', (req: any, res: any, next: any) => {
             next(err)
           }
           else {
-            //console.log("SUCCESSFULLY CONNECTED!!!")
             req.session.loggedIn = true
             req.session.user = result
             res.redirect('/')
@@ -138,7 +157,6 @@ authRouter.post('/login', (req: any, res: any, next: any) => {
       res.render('login.ejs', {notFoundErr : notFoundErr, pwdErr : pwdErr})
     } else {
       //console.log("SUCCESSFULLY CONNECTED!!!")
-
       req.session.loggedIn = true
       req.session.user = result
       res.redirect('/')
@@ -215,13 +233,15 @@ const authCheck = function (req: any, res: any, next: any) {
   } else res.redirect('/login')
 }
 
+//if the user is authenticated, then go to its profile page with its metrics
 app.get('/', authCheck, (req: any, res: any) => {
   var time : string = ""
   res.render('index', { name: req.session.user.username, datetime : time})
 })
 
+//Display an error page if the URL is unknown
 app.use(function(req, res, next){
-  res.status(404).render('error.ejs', {port: port});
+  res.status(404).render('error.ejs', {});
 });
 
 app.listen(port, (err: Error) => {

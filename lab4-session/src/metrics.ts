@@ -63,11 +63,13 @@ export class MetricsHandler {
       })
   }
 
+  //Delete user's metric in the database
   public delete(user : string, timestamp: string) {
     let key : string = "metric:"+user+":"+timestamp+""
     this.db.del(key, (err)=>null)
   }
 
+  //Add a new metric in user's database
   public add(user : string, timestamp: string, value : string) {
     let key : string = "metric:"+user+":"+timestamp+""
     let Value : string = value
