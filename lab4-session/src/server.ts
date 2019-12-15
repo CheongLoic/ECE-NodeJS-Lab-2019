@@ -1,6 +1,5 @@
 import express = require('express')
 import { Metric, MetricsHandler } from './metrics'
-import {drawChart} from './lineChart'
 import path = require('path')
 import bodyparser = require('body-parser')
 import session = require('express-session')
