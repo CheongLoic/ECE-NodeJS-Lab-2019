@@ -22,24 +22,25 @@ There are :
 
 Don't hesitate to play with the UI (User Interface). Enter a wrong username or password to display an error mmessage in the front
 
-## List of routes :
+## List of routes
+
 * GET
-- http://localhost:8082/ 
-- http://localhost:8082/login
-- http://localhost:8082/logout
-- http://localhost:8082/signup
-- http://localhost:8082/metrics/:usename read raw metrics being unlogged
-- http://localhost:8082/user/:username read user's credentials
+    - http://localhost:8082/ 
+    - http://localhost:8082/login
+    - http://localhost:8082/logout
+    - http://localhost:8082/signup
+    - http://localhost:8082/metrics/:usename read raw metrics being unlogged
+    - http://localhost:8082/user/:username read user's credentials
 
 * POST
-- http://localhost:8082/metrics/:usename insert metrics unlogged from Postman
-- http://localhost:8082/login
-- http://localhost:8082/signup
-- http://localhost:8082/delete Delete a metric when connected
-- http://localhost:8082/add Add a new metric when connected
-- http://localhost:8082/convert Convert datetime into timestamp
-- http://localhost:8082/convert2 Convert timestamp into datetime
-- http://localhost:8082/user/ Add a new user from Postman
+    - http://localhost:8082/metrics/:usename insert metrics unlogged from Postman
+    - http://localhost:8082/login
+    - http://localhost:8082/signup
+    - http://localhost:8082/delete Delete a metric when connected
+    - http://localhost:8082/add Add a new metric when connected
+    - http://localhost:8082/convert Convert datetime into timestamp
+    - http://localhost:8082/convert2 Convert timestamp into datetime
+    - http://localhost:8082/user/ Add a new user from Postman
 
 
 
