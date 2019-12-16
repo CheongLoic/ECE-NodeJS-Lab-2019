@@ -50,6 +50,7 @@ After you cloned the repository , execute those commands :
 - `npm install`
 - `npm run build`
 - `npm start` or `npm run dev`
+
 Then open a browser with the link below http://localhost:8082/
 
 
