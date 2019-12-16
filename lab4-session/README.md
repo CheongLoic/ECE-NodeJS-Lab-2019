@@ -1,4 +1,4 @@
-# ECE NodeJS Lab 3 2019-2020
+# ECE NodeJS Lab 4 2019-2020
 
 ## Authors
 - CHEONG Loïc : huangloic@hotmail.com
@@ -7,26 +7,50 @@
 ECE's students in the group ING 4 SI 03 Inter 
 
 ## About this work
-In this lab, we use levelDB
+This work is the final project in NodeJS
 
-Tasks :
-- [x] Add a `get` function to `metrics` module
-- [x] Add a route to get a metric (one of the metric, all the metrics)
-- [x] Add a `delete` function to `metrics` module
-- [ ] Add a route to delete a metric based on its key
+There are : 
+- Home page
+- Sign In / Sign Up / Sign Out
+- Insert/update/delete metrics once logged in
+- Retrieve the user’s metrics and display it in a graph
+- Only access the user’s metrics, not the other ones
 
-Only id=loic has metrics
-Go to http://localhost:8083/metrics/loic to show all his metrics
-The route http://localhost:8083/metricsToDelete/loic doesn't work
+## Users' credentials:
+- username : loic ; password : 123456
+- username : chirag ; password : 123456
+
+Don't hesitate to play with the UI (User Interface). Enter a wrong username or password to display an error mmessage in the front
+
+## List of routes :
+* GET
+- http://localhost:8082/ 
+- http://localhost:8082/login
+- http://localhost:8082/logout
+- http://localhost:8082/signup
+- http://localhost:8082/metrics/:usename read raw metrics being unlogged
+- http://localhost:8082/user/:username read user's credentials
+
+* POST
+- http://localhost:8082/metrics/:usename insert metrics unlogged from Postman
+- http://localhost:8082/login
+- http://localhost:8082/signup
+- http://localhost:8082/delete Delete a metric when connected
+- http://localhost:8082/add Add a new metric when connected
+- http://localhost:8082/convert Convert datetime into timestamp
+- http://localhost:8082/convert2 Convert timestamp into datetime
+- http://localhost:8082/user/ Add a new user from Postman
+
+
 
 ## Run instructions
 After you cloned the repository , execute those commands :
 ``` 
-cd lab3-levelDB
+cd lab4-session
 npm install 
 npm start
 ```
-Then open a browser with the link below http://localhost:8083/
+Then open a browser with the link below http://localhost:8082/
 
 
 ## Build
@@ -38,5 +62,5 @@ npm run build
 ## Development
 
 ```bash
-npm run dev server.ts
+npm run dev 
 ```

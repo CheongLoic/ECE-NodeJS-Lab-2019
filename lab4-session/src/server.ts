@@ -23,6 +23,7 @@ app.use(bodyparser.urlencoded())
 
 const dbMet: MetricsHandler = new MetricsHandler('./db/metrics')  //create or open a levelDB database
 
+/*Add data from Postman*/
 app.post('/metrics/:id', (req: any, res: any) => {
   dbMet.save(req.params.id, req.body, (err: Error | null) => {
     if (err) throw err
@@ -30,14 +31,14 @@ app.post('/metrics/:id', (req: any, res: any) => {
   })
 })
 
+/*Get user's metrics (don't need to be connected)*/
 app.get('/metrics/:id', (req: any, res: any) => {
-  
   dbMet.getAll(
     req.params.id, (err: Error | null, metrics: Metric[] | null) => {
     if (err) throw err
     if (metrics !== null) {
       let DATA : object[]= []
-      metrics.sort(function(a : Metric, b : Metric) {
+      metrics.sort(function(a : Metric, b : Metric) { //Sort timestamp in the object "metrics" 
         if (Number(a.timestamp) > Number(b.timestamp)) {
           return 1;
         }
@@ -94,14 +95,11 @@ authRouter.get('/signup', (req: any, res: any) => {
 
 authRouter.get('/logout', (req: any, res: any) => {
   delete req.session.loggedIn
-  delete req.session.user/*
-  delete req.session.TIMESTAMP
-  delete req.session.VALUE*/
+  delete req.session.user
   res.redirect('/login')
 })
 
 authRouter.post('/signup', (req: any, res: any, next: any) => {
-  console.log("attempt to create an account")
   let existErr : string = ""
   let emptyErr : string = ""
 
@@ -118,7 +116,7 @@ authRouter.post('/signup', (req: any, res: any, next: any) => {
       emptyErr = "One of the fields was empty !"
       res.render('signup.ejs', { existErr: existErr, emptyErr : emptyErr})
     } else {
-      //all the fields are correct, start to save the new user in db
+      //all the fields are correct, start to save the new user in the database
       let user = new User(req.body.username, req.body.email, req.body.password)
       dbUser.save(req.body, function (err: Error | null) {
         //console.log("SUCCESSFULLY ADDED!!!")
@@ -143,12 +141,7 @@ authRouter.post('/login', (req: any, res: any, next: any) => {
   let pwdErr : string = ""
 
   dbUser.get(req.body.username, (err: Error | null, result?: User) => {
-    if (err) {
-      next(err)
-    }
-    //console.log(result) 
-    //console.log("pwd : "+ req.body.password)
-    if (result === undefined) {
+    if (err || result === undefined) {
       notFoundErr = "User not found. Unknown username"
       res.render('login.ejs', {notFoundErr : notFoundErr, pwdErr : pwdErr})
     } else if (!result.validatePassword(req.body.password))  {
@@ -163,6 +156,7 @@ authRouter.post('/login', (req: any, res: any, next: any) => {
   })
 })
 
+//delete a user's metric
 authRouter.post('/delete', (req: any, res: any, next: any) => {
   if (!isNaN(Number(req.body.timestamp)) && req.body.timestamp !=="") {
     dbMet.delete(req.session.user.username, req.body.timestamp)
@@ -170,6 +164,7 @@ authRouter.post('/delete', (req: any, res: any, next: any) => {
   }
 })
 
+//Add a new metric in user's database
 authRouter.post('/add', (req: any, res: any, next: any) => {
   if (req.body.timestamp !=="" && req.body.value !=="" && !isNaN(Number(req.body.value)) && !isNaN(Number(req.body.timestamp))) {
     dbMet.add(req.session.user.username, req.body.timestamp, req.body.value)
@@ -177,6 +172,7 @@ authRouter.post('/add', (req: any, res: any, next: any) => {
   }
 })
 
+//Convert datetime into timestamp
 authRouter.post('/convert', (req: any, res: any, next: any) => {
   var time : string = String(new Date(req.body.dateTime).getTime())
   var Datetime : string = "The timestamp of "+req.body.dateTime+" is : "+time+""
@@ -184,6 +180,7 @@ authRouter.post('/convert', (req: any, res: any, next: any) => {
   res.render('index', { name: req.session.user.username, datetime : Datetime, timestamp : Timestamp})
 })
 
+//Convert timestamp into datetime 
 authRouter.post('/convert2', (req: any, res: any, next: any) => {
   var Datetime: string = ""
   var Timestamp : string = ""
@@ -224,7 +221,7 @@ userRouter.post('/', (req: any, res: any, next: any) => {
 userRouter.get('/:username', (req: any, res: any, next: any) => {
   dbUser.get(req.params.username, function (err: Error | null, result?: User) {
     if (err || result === undefined) {
-      res.status(404).send("user not found")
+      res.status(404).render('error.ejs', {});
     } else res.status(200).json(result)
   })
 })
