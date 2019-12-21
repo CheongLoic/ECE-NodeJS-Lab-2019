@@ -47,10 +47,9 @@ Don't hesitate to play with the UI (User Interface). Enter a wrong username or p
 ## Run instructions
 After you cloned the repository , execute those commands :
 - `cd Final-Project-NodeJS`
-- `npm install`
-- `npm run build`
-- `npm start` or `npm run dev`
+- `npm install` Install all the dependencies
+- `npm run build` Build to convert .ts files into .js files in /dist folder
+- `npm start` or `npm run dev` ()
 
 Then open a browser with the link below http://localhost:8082/
-
 

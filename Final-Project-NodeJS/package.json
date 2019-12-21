@@ -1,13 +1,14 @@
 {
-  "name": "2-typscript",
+  "name": "final-project-nodejs",
   "version": "1.0.0",
-  "description": "",
+  "description": "This is the project in NodeJS in the Web Technologies course at ECE Paris.Lyon",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "./node_modules/.bin/ts-node src/server.ts",
     "build": "./node_modules/.bin/tsc -p tsconfig.json",
-    "dev": "./node_modules/.bin/nodemon "
+    "dev": "./node_modules/.bin/nodemon ",
+    "populate": "./node_modules/.bin/ts-node bin/populate.ts"
   },
   "author": "",
   "license": "ISC",
