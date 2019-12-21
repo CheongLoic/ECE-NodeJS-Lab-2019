@@ -1,4 +1,4 @@
-# ECE NodeJS Lab 4 2019-2020
+# ECE NodeJS Project 2019-2020
 
 ## Authors
 - CHEONG Loïc : huangloic@hotmail.com
@@ -7,7 +7,7 @@
 ECE's students in the group ING 4 SI 03 Inter 
 
 ## About this work
-This work is the final project in NodeJS
+This work is the final project in NodeJS  for the Web Technology course at ECE Paris-Lyon, ING4.
 
 There are : 
 - Home page
@@ -20,7 +20,7 @@ There are :
 - username : loic ; password : 123456
 - username : chirag ; password : 123456
 
-Don't hesitate to play with the UI (User Interface). Enter a wrong username or password to display an error mmessage in the front
+Don't hesitate to play with the UI (User Interface). Enter a wrong username or password to display an error message in the front
 
 ## List of routes
 
@@ -46,7 +46,7 @@ Don't hesitate to play with the UI (User Interface). Enter a wrong username or p
 
 ## Run instructions
 After you cloned the repository , execute those commands :
-- `cd lab4-session`
+- `cd Final-Project-NodeJS`
 - `npm install`
 - `npm run build`
 - `npm start` or `npm run dev`
