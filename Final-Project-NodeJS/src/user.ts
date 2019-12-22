@@ -8,6 +8,10 @@ export class UserHandler {
     this.db = LevelDB.open(path)
   }
 
+  public closeDB() {
+    this.db.close();
+  }
+
   public get(username: string, callback: (err: Error | null, result?: User) => void) {
     this.db.get(`user:${username}`, function (err: Error, data: any) {
         if (err) callback(err)
