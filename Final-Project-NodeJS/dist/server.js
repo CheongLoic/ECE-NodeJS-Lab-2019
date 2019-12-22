@@ -74,7 +74,6 @@ authRouter.get('/logout', function (req, res) {
     res.redirect('/login');
 });
 authRouter.post('/signup', function (req, res, next) {
-    console.log("attempt to create an account");
     var existErr = "";
     var emptyErr = "";
     /*The code below use dbUser.get(...) twice
@@ -115,12 +114,7 @@ authRouter.post('/login', function (req, res, next) {
     var notFoundErr = "";
     var pwdErr = "";
     dbUser.get(req.body.username, function (err, result) {
-        if (err) {
-            next(err);
-        }
-        //console.log(result) 
-        //console.log("pwd : "+ req.body.password)
-        if (result === undefined) {
+        if (err || result === undefined) {
             notFoundErr = "User not found. Unknown username";
             res.render('login.ejs', { notFoundErr: notFoundErr, pwdErr: pwdErr });
         }
@@ -191,7 +185,7 @@ userRouter.post('/', function (req, res, next) {
 userRouter.get('/:username', function (req, res, next) {
     dbUser.get(req.params.username, function (err, result) {
         if (err || result === undefined) {
-            res.status(404).send("user not found");
+            res.status(404).render('error.ejs', {});
         }
         else
             res.status(200).json(result);
