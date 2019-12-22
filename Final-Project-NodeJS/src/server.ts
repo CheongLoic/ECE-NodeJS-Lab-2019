@@ -159,9 +159,15 @@ authRouter.post('/login', (req: any, res: any, next: any) => {
 //delete a user's metric
 authRouter.post('/delete', (req: any, res: any, next: any) => {
   if (!isNaN(Number(req.body.timestamp)) && req.body.timestamp !=="") {
-    dbMet.delete(req.session.user.username, req.body.timestamp)
-    res.redirect('/')
+    dbMet.delete(req.session.user.username, req.body.timestamp, (err: Error | null) => {
+      if (err) throw err;
+      res.redirect('/')
+    })
   }
+
+  
+
+
 })
 
 //Add a new metric in user's database
