@@ -13,8 +13,8 @@ describe('Metrics', function () {
 
 
     describe('#get', function () {
-        it('should get empty array on non existing user', function (done) {
-            dbMet.getAll("0", function (err: Error | null, result?: Metric[]| null) {
+        it('should get an empty array on non existing user', function (done) {
+            dbMet.getAll("uvhviu", function (err: Error | null, result?: Metric[]| null) {
                 expect(err).to.be.null
                 expect(result).to.not.be.undefined
                 expect(result).to.be.empty
@@ -92,7 +92,7 @@ describe('Metrics', function () {
     })
 
     it('should not fail if data does not exist', function (done) {
-        dbMet.delete('zeihvizjkvb', '9998', function (err: Error | null) {
+        dbMet.delete('zeihvizjkvb', '1576929600000', function (err: Error | null) {
             expect(err).to.be.undefined;
             done()
         })

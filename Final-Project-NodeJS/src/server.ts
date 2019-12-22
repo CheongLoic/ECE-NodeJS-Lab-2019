@@ -117,8 +117,8 @@ authRouter.post('/signup', (req: any, res: any, next: any) => {
       res.render('signup.ejs', { existErr: existErr, emptyErr : emptyErr})
     } else {
       //all the fields are correct, start to save the new user in the database
-      let user = new User(req.body.username, req.body.email, req.body.password)
-      dbUser.save(req.body, function (err: Error | null) {
+      const user : User = new User(req.body.username, req.body.email, req.body.password)
+      dbUser.save(user, function (err: Error | null) {
         //console.log("SUCCESSFULLY ADDED!!!")
         dbUser.get(req.body.username, (err: Error | null, result?: User) => {
           //console.log(result) 
