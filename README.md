@@ -8,8 +8,9 @@ ECE's students in the group ING 4 SI 03 Inter
 
 ## About this repository
 This repository contains folders with weekly labs. 
-There is a README.md file in each folder to present the content and how to run it
-The final project in NodeJS is in the folder `Final-Project-NodeJS`
+There is a README.md file in each folder to present the content and how to run it.
+
+The final project in NodeJS is in the folder `Final-Project-NodeJS`.
 
 ## Run instructions
 1. Choose an editor of your choice (VS Code, WebStorm, Atom, Sublime Text, TextWrangler, Notepad++; etc.)
