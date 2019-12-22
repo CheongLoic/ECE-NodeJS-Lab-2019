@@ -20,7 +20,8 @@ There are :
 - username : loic ; password : 123456
 - username : chirag ; password : 123456
 
-Don't hesitate to play with the UI (User Interface). Enter a wrong username or password to display an error message in the front
+NB: Don't hesitate to play with the UI (User Interface). Enter a wrong username or password to display an error message in the front
+Moreover don't forget to use `npm run populate`, otherwise these ceredentials won't work
 
 ## List of routes
 
@@ -48,8 +49,9 @@ Don't hesitate to play with the UI (User Interface). Enter a wrong username or p
 After you cloned the repository , execute those commands :
 - `cd Final-Project-NodeJS`
 - `npm install` Install all the dependencies
+- `npm run populate` Populate the database
 - `npm run build` Build to convert .ts files into .js files in /dist folder
-- `npm start` or `npm run dev` ()
+- `npm start` (run the app) or `npm run dev` (reload the page when changes occurs in the source code)
 
 Then open a browser with the link below http://localhost:8082/
 
