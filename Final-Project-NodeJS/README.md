@@ -4,10 +4,10 @@
 - CHEONG Loïc : huangloic@hotmail.com
 - GUPTA Chirag : chiraggupta199806@gmail.com
 
-ECE's students in the group ING 4 SI 03 Inter 
+ECE's students in the group ING 4 SI Group 03 Inter 
 
 ## About this work
-This work is the final project in NodeJS  for the Web Technology course at ECE Paris-Lyon, ING4.
+This work is the final project in NodeJS  for the Web Technologies course at ECE Paris.Lyon, in ING4, on December 2019.
 
 There are : 
 - Home page
@@ -21,16 +21,18 @@ There are :
 - username : chirag ; password : 123456
 
 NB: 
+    
     - Don't hesitate to play with the UI (User Interface). Enter a wrong username or password to display an error message in the front.
+
     - Moreover don't forget to use `npm run populate`, otherwise these ceredentials won't work.
 
 ## List of routes
 
 * GET
-    - http://localhost:8082/ 
-    - http://localhost:8082/login
-    - http://localhost:8082/logout
-    - http://localhost:8082/signup
+    - http://localhost:8082/ if user connected, show its profile page, otherwise he/she will be redirected to the login page
+    - http://localhost:8082/login Login page
+    - http://localhost:8082/logout Disconnect the user and redirect her/him to the login page
+    - http://localhost:8082/signup  Sign up page
     - http://localhost:8082/metrics/:usename read raw metrics being unlogged
     - http://localhost:8082/user/:username read user's credentials
 
@@ -51,8 +53,9 @@ After you cloned the repository , execute those commands :
 - `cd Final-Project-NodeJS`
 - `npm install` Install all the dependencies
 - `npm run populate` Populate the database
+- `npm test` Unit tests with mocha and chai
 - `npm run build` Build to convert .ts files into .js files in /dist folder
-- `npm start` (run the app) or `npm run dev` (reload the page when changes occurs in the source code)
+- `npm start` (run the app) or `npm run dev` (reload the page when changes saved in the source code)
 
 Then open a browser with the link below http://localhost:8082/
 

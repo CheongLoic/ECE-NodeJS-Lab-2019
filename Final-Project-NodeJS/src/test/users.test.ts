@@ -23,7 +23,7 @@ describe('Users', function () {
     })
 
     describe('#save', function () {
-        it('should save a new user and get it', function (done) {
+        it('should save a new users and get it', function (done) {
             const user1 : User = new User("elisabeth", "elisabeth2.TheQueen@gmail.com", "123456")
             const user2 : User = new User("Charles", "charles.PrinceOfWales.com", "123456")
             let users : User[] = []
@@ -55,7 +55,7 @@ describe('Users', function () {
             })
         })
 
-        it('should delete the user from the database', function (done) {
+        it('should delete the user Elisabeth from the database', function (done) {
             dbUser.delete('elisabeth', function (err: Error | null) {
                 expect(err).to.be.undefined;
                 dbUser.getAll( function (error: Error | null, result?: User []) {
