@@ -21,10 +21,8 @@ There are :
 - username : chirag ; password : 123456
 
 NB: 
-    
-    - Don't hesitate to play with the UI (User Interface). Enter a wrong username or password to display an error message in the front.
-
-    - Moreover don't forget to use `npm run populate`, otherwise these ceredentials won't work.
+- Don't hesitate to play with the UI (User Interface). Enter a wrong username or password to display an error message in the front.
+- Moreover don't forget to use `npm run populate`, otherwise these ceredentials won't work.
 
 ## List of routes
 
