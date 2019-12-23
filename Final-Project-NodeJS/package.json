@@ -1,6 +1,6 @@
 {
   "name": "final-project-nodejs",
-  "version": "2.1.0",
+  "version": "3.5.0",
   "description": "This is the project in NodeJS in the Web Technologies course at ECE Paris.Lyon",
   "main": "index.js",
   "scripts": {
